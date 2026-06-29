@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MadFlow 下载</title>
+    <meta
+      name="description"
+      content="MadFlow 是一个用于批量光流、素材慢放和素材评分的轻量工具。"
+    />
+    <link rel="icon" href="./assets/MadFlow.png" />
+    <link rel="apple-touch-icon" href="./assets/MadFlow.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambientFlow" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="topControls">
+      <button class="themeToggle" type="button" aria-label="切换黑白页面">
+        <span class="themeIcon" aria-hidden="true"></span>
+      </button>
+      <div class="supportMenu">
+        <button class="supportButton" type="button" aria-label="赞赏开发者">
+          <span class="supportIcon" aria-hidden="true"></span>
+          赞赏
+        </button>
+        <div class="supportPanel" role="dialog" aria-label="赞赏开发者">
+          <img src="./assets/support-qr.jpg" alt="赞赏二维码" />
+          <p>开发者邮箱</p>
+          <a href="mailto:mkgyaa@gmail.com">mkgyaa@gmail.com</a>
+          <small>赞赏可发邮件，不赞别发，（认真的）</small>
+        </div>
+      </div>
+    </div>
+    <main>
+      <section class="hero" aria-labelledby="heroTitle">
+        <img class="appIcon reveal" src="./assets/MadFlow.png" alt="MadFlow 图标" />
+        <p class="appName reveal">MadFlow</p>
+        <h1 id="heroTitle" class="reveal">将你的素材批量光流</h1>
+        <div class="downloadActions reveal" aria-label="下载 MadFlow">
+          <a class="downloadButton primary" href="https://github.com/mkg121212/madflow/releases/download/v0.1.0/MadFlow-Setup-x64.exe">
+            Windows 下载
+          </a>
+          <a class="downloadButton" href="https://github.com/mkg121212/madflow/releases/download/v0.1.0/MadFlow-macOS-arm64.dmg">
+            macOS 下载
+          </a>
+        </div>
+      </section>
+
+      <section class="section intro reveal" aria-label="软件介绍">
+        <p>
+          光流！光流！光流！把你拍摄的素材通通拿过来光流。MadFlow 支持大批量素材处理，
+          用完善的批处理逻辑，让电脑在闲置时慢慢处理素材。
+        </p>
+        <p>
+          整体做减法：仅保留单个片段和放慢倍速两个栏位，减少设置的时间。
+        </p>
+      </section>
+
+      <section class="section batch reveal" aria-labelledby="batchTitle">
+        <p class="sectionKicker">批量处理</p>
+        <h2 id="batchTitle">一次导出，处理完所有素材</h2>
+        <p>
+          每个素材都能单独选择导出文件夹、放慢倍速、片段时长和具体片段。CPU 和内存紧张时慢处理，
+          空闲时快处理。智能调色 beta 会顺手把素材拉向中性状态。
+        </p>
+        <div class="batchShowcase">
+          <img src="./assets/batch-processing.png" alt="MadFlow 批处理界面截图" />
+        </div>
+        <div class="logPreview" aria-label="可视化日志预览">
+          <div class="logChrome" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="logStream" aria-hidden="true">
+            <p><time>14:02:18</time><span>扫描素材文件夹，发现 128 个片段</span></p>
+            <p><time>14:02:22</time><span>片段 001 设置：0.5x / 6 秒 / 输出到 A-roll</span></p>
+            <p><time>14:03:04</time><span>检测到 CPU 占用较低，切换为快处理</span></p>
+            <p><time>14:03:41</time><span>智能调色 beta：拉回过暗素材中性灰</span></p>
+            <p><time>14:04:10</time><span>低于 30 帧，启动光流补帧</span></p>
+            <p><time>14:06:33</time><span>素材评分完成：可挽救问题 2 项</span></p>
+            <p><time>14:07:09</time><span>写入导出队列，继续处理下一个片段</span></p>
+            <p><time>14:07:42</time><span>扫描素材文件夹，发现 128 个片段</span></p>
+            <p><time>14:07:46</time><span>片段 001 设置：0.5x / 6 秒 / 输出到 A-roll</span></p>
+            <p><time>14:08:18</time><span>检测到 CPU 占用较低，切换为快处理</span></p>
+          </div>
+        </div>
+        <p class="logCaption">软件使用可视化日志，方便了解实时进展，以及 DeBug。</p>
+      </section>
+
+      <section class="section score reveal" aria-labelledby="scoreTitle">
+        <p class="sectionKicker">自动素材筛选</p>
+        <h2 id="scoreTitle">从长素材里切出能用的</h2>
+        <p>
+          MadFlow 会主动检查画面是否太暗、过曝、层次太少、低饱和、画面变化太少、模糊，
+          以及大幅甩动和严重晃动，自动切出更值得处理的片段。
+        </p>
+        <div class="timelineCut" aria-hidden="true">
+          <div class="timelineRuler">
+            <span>00:00</span>
+            <span>00:18</span>
+            <span>00:36</span>
+            <span>00:54</span>
+          </div>
+          <div class="timelineEditor">
+            <div class="trackLabels">
+              <span>素材</span>
+              <span>筛选</span>
+            </div>
+            <div class="trackArea">
+              <div class="track raw">
+                <span class="clip muted"></span>
+                <span class="clip shaky"></span>
+                <span class="clip usable one"></span>
+                <span class="clip blown"></span>
+                <span class="clip usable two"></span>
+                <span class="clip soft"></span>
+              </div>
+              <div class="track selected">
+                <span class="selectedClip one"></span>
+                <span class="selectedClip two"></span>
+              </div>
+              <i class="playhead"></i>
+            </div>
+          </div>
+          <div class="cutPieces">
+            <span>可挽救：偏暗 / 轻微低饱和 / 层次少</span>
+            <span>难挽救：过曝 / 严重模糊 / 大幅甩动</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section score reveal" aria-labelledby="scoreLiveTitle">
+        <p class="sectionKicker">重要功能</p>
+        <h2 id="scoreLiveTitle">素材评分</h2>
+        <p>
+          MadFlow 会检测画面是否太暗、过曝、明暗层次太少、饱和度太低、画面变化太少、
+          画面太糊，以及运动是否太剧烈，比如大幅甩动和严重晃动，并给出评分。
+        </p>
+        <div class="scoreDemo" aria-label="实时素材评分演示">
+          <div class="scoreReadout">
+            <strong id="liveScore">72</strong>
+            <div class="scoreText">
+              <span id="scoreTier">不错档</span>
+              <p id="scoreRemark">这条素材挺能打。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section changelog reveal" aria-labelledby="changelogTitle">
+        <p class="sectionKicker">更新日志</p>
+        <h2 id="changelogTitle">版本记录</h2>
+        <div class="releaseList">
+          <article class="releaseItem">
+            <div>
+              <h3>0.1.1</h3>
+              <span>还没发布</span>
+            </div>
+            <p>使用 Tauri + 裁剪版 FFmpeg，精简内核，将安装包体积下降三分之二。</p>
+          </article>
+          <article class="releaseItem">
+            <div>
+              <h3>0.1.0</h3>
+              <span>第一个版本</span>
+            </div>
+            <p>支持批量光流、单素材独立参数、自适应批处理、智能调色 beta、可视化日志和素材评分。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script src="./page.js"></script>
+  </body>
+</html>
