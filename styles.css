@@ -455,6 +455,7 @@ h2 {
 
 .score > p:not(.sectionKicker),
 .batch > p:not(.sectionKicker),
+.rage > p:not(.sectionKicker),
 .changelog > p:not(.sectionKicker) {
   max-width: 720px;
   margin: 24px auto 0;
@@ -745,6 +746,228 @@ h2 {
 body.lightMode .timelineEditor {
   background:
     linear-gradient(180deg, rgba(17, 17, 19, 0.045), rgba(17, 17, 19, 0.02));
+}
+
+.ragePanel {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: 28px;
+  align-items: center;
+  width: min(760px, 100%);
+  margin: 48px auto 0;
+  padding: 22px;
+  border: 1px solid rgba(255, 59, 48, 0.18);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 12% 30%, rgba(255, 59, 48, 0.13), transparent 30%),
+    linear-gradient(180deg, rgba(28, 18, 18, 0.72), rgba(12, 10, 12, 0.82));
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.rageToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 58px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--text);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.rageToggle:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 59, 48, 0.08);
+}
+
+.rageToggle strong {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.46);
+}
+
+.rageSwitch {
+  position: relative;
+  flex: 0 0 auto;
+  width: 54px;
+  height: 30px;
+  border-radius: 999px;
+  background: #d8140d;
+  box-shadow:
+    0 0 16px rgba(255, 59, 48, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.rageSwitch::before {
+  position: absolute;
+  top: 5px;
+  left: 29px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  content: "";
+  background: #fff;
+  transition:
+    left 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.rageToggle[aria-pressed="true"] {
+  background: rgba(255, 59, 48, 0.14);
+  box-shadow: 0 0 26px rgba(255, 59, 48, 0.22);
+}
+
+.rageToggle[aria-pressed="true"] .rageSwitch {
+  background: #ff3b30;
+  box-shadow: 0 0 18px rgba(255, 59, 48, 0.62);
+  animation: turboRedPulse 5s ease-in-out 1;
+}
+
+.rageToggle[aria-pressed="true"] .rageSwitch::before {
+  left: 29px;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.74);
+}
+
+.rageMeter {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  height: 52px;
+  align-items: end;
+}
+
+.rageMeter span {
+  display: block;
+  height: 26%;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #ffbf5f, #ff3b30 52%, #96130e);
+  opacity: 0.55;
+  transform-origin: bottom;
+}
+
+.rageToggle[aria-pressed="true"] + .rageMeter span {
+  animation: coreBurn 620ms ease-in-out infinite alternate;
+}
+
+.rageMeter span:nth-child(2) {
+  height: 42%;
+  animation-delay: -120ms;
+}
+
+.rageMeter span:nth-child(3) {
+  height: 58%;
+  animation-delay: -260ms;
+}
+
+.rageMeter span:nth-child(4) {
+  height: 72%;
+  animation-delay: -90ms;
+}
+
+.rageMeter span:nth-child(5) {
+  height: 48%;
+  animation-delay: -330ms;
+}
+
+.rageMeter span:nth-child(6) {
+  height: 80%;
+  animation-delay: -180ms;
+}
+
+.rageMeter span:nth-child(7) {
+  height: 64%;
+  animation-delay: -420ms;
+}
+
+.rageMeter span:nth-child(8) {
+  height: 38%;
+  animation-delay: -230ms;
+}
+
+.rageOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease-out;
+}
+
+.rageOverlay.playing {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rageFireVideo {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+}
+
+.rageOverlayText {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 10px;
+  padding: 0 24px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 3px 22px rgba(0, 0, 0, 0.72);
+  animation: rageTextPulse 1s ease-in-out infinite alternate;
+}
+
+.rageOverlayText span {
+  font-size: clamp(18px, 2.5vw, 30px);
+  font-weight: 700;
+}
+
+.rageOverlayText strong {
+  font-size: clamp(36px, 8vw, 96px);
+  line-height: 1.02;
+}
+
+.rageClose {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 3;
+  min-height: 38px;
+  padding: 8px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.32);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+}
+
+body.lightMode .ragePanel {
+  border-color: rgba(255, 59, 48, 0.18);
+  background:
+    radial-gradient(circle at 12% 30%, rgba(255, 59, 48, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 248, 251, 0.84));
+  box-shadow: 0 24px 80px rgba(17, 29, 52, 0.1);
 }
 
 .featureGrid {
@@ -1194,6 +1417,55 @@ body.lightMode .releaseItem:hover {
   }
 }
 
+@keyframes turboRedPulse {
+  0%,
+  100% {
+    background: #ff3b30;
+    box-shadow: 0 0 12px rgba(255, 59, 48, 0.38);
+    transform: scale(1);
+  }
+
+  18%,
+  48%,
+  78% {
+    background: #ff160a;
+    box-shadow: 0 0 24px rgba(255, 38, 24, 0.82);
+    transform: scale(1.08);
+  }
+
+  32%,
+  62%,
+  92% {
+    background: #a90f0a;
+    box-shadow: 0 0 9px rgba(255, 38, 24, 0.3);
+    transform: scale(0.98);
+  }
+}
+
+@keyframes coreBurn {
+  from {
+    opacity: 0.58;
+    transform: scaleY(0.74);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1.18);
+  }
+}
+
+@keyframes rageTextPulse {
+  from {
+    opacity: 0.78;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
 @media (max-width: 720px) {
   .topControls {
     top: 14px;
@@ -1303,6 +1575,20 @@ body.lightMode .releaseItem:hover {
   .cutPieces {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .ragePanel {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .rageToggle {
+    min-height: 50px;
+  }
+
+  .rageToggle strong {
+    font-size: 18px;
   }
 
   .section {

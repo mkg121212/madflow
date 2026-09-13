@@ -66,7 +66,7 @@
         <h2 id="batchTitle">一次导出，处理完所有素材</h2>
         <p>
           每个素材都能单独选择导出文件夹、放慢倍速、片段时长和具体片段。CPU 和内存紧张时慢处理，
-          空闲时快处理。智能调色会顺手把素材拉向中性状态。
+          空闲时快处理。智能调色 2.0 会顺手把素材拉向中性状态。
         </p>
         <div class="batchShowcase">
           <img src="./assets/batch-processing.png" alt="MadFlow 批处理界面截图" />
@@ -81,7 +81,7 @@
             <p><time>14:02:18</time><span>扫描素材文件夹，发现 128 个片段</span></p>
             <p><time>14:02:22</time><span>片段 001 设置：0.5x / 6 秒 / 输出到 A-roll</span></p>
             <p><time>14:03:04</time><span>检测到 CPU 占用较低，切换为快处理</span></p>
-            <p><time>14:03:41</time><span>智能调色：拉回过暗素材中性灰</span></p>
+            <p><time>14:03:41</time><span>智能调色 2.0：拉回过暗素材中性灰</span></p>
             <p><time>14:04:10</time><span>低于 30 帧，启动光流补帧</span></p>
             <p><time>14:06:33</time><span>素材评分完成：可挽救问题 2 项</span></p>
             <p><time>14:07:09</time><span>写入导出队列，继续处理下一个片段</span></p>
@@ -91,6 +91,31 @@
           </div>
         </div>
         <p class="logCaption">软件使用可视化日志，方便了解实时进展，以及 DeBug。</p>
+      </section>
+
+      <section class="section rage reveal" aria-labelledby="rageTitle">
+        <p class="sectionKicker">狂暴模式</p>
+        <h2 id="rageTitle">所有核心，一起开工</h2>
+        <p>
+          普通模式会给系统留余量；狂暴模式会把队列并发拉满，调用机器所有核心处理素材，
+          适合插电、散热稳定、想尽快跑完一批任务的时候打开。
+        </p>
+        <div class="ragePanel">
+          <button class="rageToggle" type="button" aria-pressed="false" aria-label="开启狂暴模式演示">
+            <span class="rageSwitch" aria-hidden="true"></span>
+            <strong>狂暴模式</strong>
+          </button>
+          <div class="rageMeter" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </section>
 
       <section class="section score reveal" aria-labelledby="scoreTitle">
@@ -160,27 +185,35 @@
           <article class="releaseItem">
             <div>
               <h3>0.2.0</h3>
-              <span>最新版本</span>
+              <span>最新版本 · 2026-09-13</span>
             </div>
-            <p>更新智能调色；新增狂暴模式，可调用机器所有核心进行处理。</p>
+            <p>更新智能调色 2.0；新增狂暴模式，可调用机器所有核心进行处理。</p>
           </article>
           <article class="releaseItem">
             <div>
               <h3>0.1.1</h3>
-              <span>还没发布</span>
+              <span>已发布 · 2026-07-29</span>
             </div>
-            <p>使用 Tauri + 裁剪版 FFmpeg，精简内核，将安装包体积下降三分之二。</p>
+            <p>安装包体积大幅降低，下载安装更轻，启动和分发都更省心。</p>
           </article>
           <article class="releaseItem">
             <div>
               <h3>0.1.0</h3>
-              <span>第一个版本</span>
+              <span>第一个版本 · 2026-06-29</span>
             </div>
             <p>支持批量光流、单素材独立参数、自适应批处理、智能调色 beta、可视化日志和素材评分。</p>
           </article>
         </div>
       </section>
     </main>
+    <div class="rageOverlay" aria-hidden="true">
+      <button class="rageClose" type="button" aria-label="关闭狂暴模式演示">关闭</button>
+      <video class="rageFireVideo" muted playsinline preload="auto"></video>
+      <div class="rageOverlayText">
+        <span>MadFlow 狂暴模式</span>
+        <strong>所有核心正在全速处理</strong>
+      </div>
+    </div>
     <script src="./page.js"></script>
   </body>
 </html>

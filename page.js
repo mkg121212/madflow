@@ -6,6 +6,10 @@ const liveScore = document.querySelector("#liveScore");
 const scoreTier = document.querySelector("#scoreTier");
 const scoreRemark = document.querySelector("#scoreRemark");
 const scoreReadout = document.querySelector(".scoreReadout");
+const rageToggle = document.querySelector(".rageToggle");
+const rageOverlay = document.querySelector(".rageOverlay");
+const rageClose = document.querySelector(".rageClose");
+const rageFireVideo = document.querySelector(".rageFireVideo");
 let savedTheme = null;
 
 try {
@@ -49,6 +53,43 @@ themeToggle?.addEventListener("click", (event) => {
   } catch {
     // Theme still switches for the current session.
   }
+});
+
+if (rageFireVideo) {
+  const usesAppleMedia = /Macintosh|Mac OS X/i.test(navigator.userAgent);
+  rageFireVideo.src = usesAppleMedia ? "./assets/turbo-fire.mov" : "./assets/turbo-fire.webm";
+  rageFireVideo.load();
+}
+
+rageToggle?.addEventListener("click", () => {
+  const shouldPlay = rageToggle.getAttribute("aria-pressed") !== "true";
+  rageToggle.setAttribute("aria-pressed", String(shouldPlay));
+  if (shouldPlay) {
+    playRageDemo();
+  } else {
+    hideRageDemo();
+  }
+});
+
+rageClose?.addEventListener("click", () => {
+  rageToggle?.setAttribute("aria-pressed", "false");
+  hideRageDemo();
+});
+
+rageFireVideo?.addEventListener("ended", () => {
+  rageToggle?.setAttribute("aria-pressed", "false");
+  hideRageDemo();
+});
+
+rageFireVideo?.addEventListener("error", () => {
+  rageToggle?.setAttribute("aria-pressed", "false");
+  hideRageDemo();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  rageToggle?.setAttribute("aria-pressed", "false");
+  hideRageDemo();
 });
 
 document.addEventListener("click", (event) => {
@@ -172,3 +213,25 @@ function renderScore() {
 
 renderScore();
 setInterval(renderScore, 1900);
+
+function playRageDemo() {
+  if (!rageOverlay || !rageFireVideo) return;
+  rageOverlay.setAttribute("aria-hidden", "false");
+  rageOverlay.classList.remove("playing");
+  rageFireVideo.currentTime = 0;
+  requestAnimationFrame(() => {
+    rageOverlay.classList.add("playing");
+    document.documentElement.requestFullscreen?.().catch(() => {});
+    rageFireVideo.play().catch(hideRageDemo);
+  });
+}
+
+function hideRageDemo() {
+  if (!rageOverlay || !rageFireVideo) return;
+  rageOverlay.classList.remove("playing");
+  rageOverlay.setAttribute("aria-hidden", "true");
+  rageFireVideo.pause();
+  if (document.fullscreenElement) {
+    document.exitFullscreen?.().catch(() => {});
+  }
+}
