@@ -8,7 +8,6 @@ const scoreRemark = document.querySelector("#scoreRemark");
 const scoreReadout = document.querySelector(".scoreReadout");
 const rageToggle = document.querySelector(".rageToggle");
 const rageOverlay = document.querySelector(".rageOverlay");
-const rageClose = document.querySelector(".rageClose");
 const rageFireVideo = document.querySelector(".rageFireVideo");
 let savedTheme = null;
 
@@ -69,16 +68,6 @@ rageToggle?.addEventListener("click", () => {
   } else {
     hideRageDemo();
   }
-});
-
-rageClose?.addEventListener("click", () => {
-  rageToggle?.setAttribute("aria-pressed", "false");
-  hideRageDemo();
-});
-
-rageFireVideo?.addEventListener("ended", () => {
-  rageToggle?.setAttribute("aria-pressed", "false");
-  hideRageDemo();
 });
 
 rageFireVideo?.addEventListener("error", () => {
@@ -221,7 +210,7 @@ function playRageDemo() {
   rageFireVideo.currentTime = 0;
   requestAnimationFrame(() => {
     rageOverlay.classList.add("playing");
-    document.documentElement.requestFullscreen?.().catch(() => {});
+    document.body.classList.add("rageBurning");
     rageFireVideo.play().catch(hideRageDemo);
   });
 }
@@ -230,8 +219,6 @@ function hideRageDemo() {
   if (!rageOverlay || !rageFireVideo) return;
   rageOverlay.classList.remove("playing");
   rageOverlay.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("rageBurning");
   rageFireVideo.pause();
-  if (document.fullscreenElement) {
-    document.exitFullscreen?.().catch(() => {});
-  }
 }
