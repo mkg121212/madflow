@@ -906,11 +906,10 @@ body.lightMode .timelineEditor {
   opacity: 0;
   pointer-events: none;
   transition: opacity 120ms ease-out;
-  mix-blend-mode: screen;
 }
 
 .rageOverlay.playing {
-  opacity: 0.86;
+  opacity: 0.62;
 }
 
 .rageFireVideo {
@@ -922,6 +921,7 @@ body.lightMode .timelineEditor {
   object-fit: cover;
   object-position: center;
   transform: scale(1.04);
+  filter: saturate(1.28) contrast(1.04);
 }
 
 body.rageBurning main {
