@@ -70,6 +70,8 @@ rageToggle?.addEventListener("click", () => {
   }
 });
 
+rageFireVideo?.addEventListener("ended", hideRageDemo);
+
 rageFireVideo?.addEventListener("error", () => {
   rageToggle?.setAttribute("aria-pressed", "false");
   hideRageDemo();
